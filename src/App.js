@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import { AddIcon, EditIcon, DeleteIcon } from './components/Icons'
 import './App.css';
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
         >
           Learn React
         </a>
+        <AddIcon />
+        <EditIcon />
+        <DeleteIcon />
       </header>
     </div>
   );
