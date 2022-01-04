@@ -1,13 +1,13 @@
 import { DeleteIcon, EditIcon } from './Icons'
 
-const TodoItem = ({ task = "", onDelete, index }) => {
+const TodoItem = ({ task = "", onDelete, onEdit, index }) => {
     console.log("render-TodoItem")
     return (
         <div className="todo-item">
             <input className="todo-checkbox" type="checkbox" />
             <p className="todo-content">{task}</p>
             <div className="todo-actions">
-                <button className="btn btn-secondary mr-small">
+                <button className="btn btn-secondary mr-small" onClick={() => onEdit(index)}>
                     <EditIcon className="medium-icon" />
                 </button>
                 <button className="btn btn-danger" onClick={() => onDelete(index)}>

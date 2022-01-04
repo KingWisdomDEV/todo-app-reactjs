@@ -41,7 +41,7 @@ body {
 
 .btn {
   padding: 1rem 1.5rem;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   border: none;
 }
 
@@ -135,3 +135,71 @@ body {
 .mr-small {
   margin-right: 1rem;
 }
+
+/* Popup Edit */
+.popup-edit{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .6);
+}
+
+.popup-content{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 800px;
+  max-width: 80%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #e6e6e6;
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.popup-header{
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #000;
+}
+
+.heading-secondary{
+  font-size: 2rem;
+  flex: 1;
+}
+
+.btn-close {
+  background-color: #fff;
+  padding: .5rem;
+  border: none;
+}
+
+.close-icon {
+  width: 3rem;
+  height: 3rem;
+  transition: all .2s;
+}
+
+.close-icon:hover {
+  transform: scale(1.2);
+}
+
+.popup-body{
+  background-color: #fff;
+  padding: 2rem;
+  text-align: center;
+}
+
+.todo-text{
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.6rem;
+  border: 2px solid #e6e6e6;
+  border-radius: .5rem 0 0 .5rem;
+  margin-bottom: 2rem;
+  resize: none;
+}
+
