@@ -1,8 +1,10 @@
+import { memo } from 'react'
 import TodoItem from './TodoItem'
 
 const TodoTask = ({ tasks = [], onDelete }) => {
     console.log("render-TodoTask")
-    console.log(tasks)
+    if (tasks.length <= 0) return null
+
     return (
         <div className="todo-tasks">
             {tasks.map((task, index) => 
@@ -12,4 +14,4 @@ const TodoTask = ({ tasks = [], onDelete }) => {
     )
 }
 
-export default TodoTask
+export default memo(TodoTask)

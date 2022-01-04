@@ -1,4 +1,4 @@
-import { useReducer } from "react"
+import { useReducer, useCallback } from "react"
 import './App.css';
 import TodoNew from './components/TodoNew'
 import TodoTask from './components/TodoTask'
@@ -9,28 +9,33 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initState)
   const { newTask, tasks } = state;
 
-  const handleChangeTask = (task) => {
+  const handleChangeTask = useCallback((task) => {
     dispatch(setNewTask(task))
-  }
+  }, [newTask])
   
-  const handleAddTask = () => {
+  const handleAddTask = useCallback(() => {
     dispatch(addNewTask(newTask))
     dispatch(setNewTask(""))
-  }
+  }, [newTask])
   
-  const handleDeleteTask = (index) => {
+  const handleDeleteTask = useCallback((index) => {
     dispatch(deleteTask(index))
-  }
+  }, [tasks.length])
 
   console.log("re-render")
 
   return (
     <div className="container">
       <div className="todo-box">
-        <h1 className="heading">Todos<span> (5)</span></h1>
+        <h1 className="heading">Todos<span> ({tasks.length || 0})</span></h1>
         <div className="todo-body">
-          <TodoNew onChange={handleChangeTask} onSubmit={handleAddTask} />
-          <TodoTask tasks={tasks} onDelete={handleDeleteTask}/>
+          <TodoNew 
+            newTask={newTask} 
+            onChange={handleChangeTask} 
+            onSubmit={handleAddTask} />
+          <TodoTask 
+            tasks={tasks} 
+            onDelete={handleDeleteTask}/>
         </div>
       </div>
     </div>

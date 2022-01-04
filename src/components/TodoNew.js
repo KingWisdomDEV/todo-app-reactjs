@@ -1,10 +1,11 @@
+import { memo } from 'react'
 import { AddIcon } from './Icons'
 
-const TodoNew = ({ onChange, onSubmit }) => {
+const TodoNew = ({ newTask, onChange, onSubmit }) => {
     console.log("render-TodoNew")
     return (
         <div className="todo-new">
-            <input className="todo-input" placeholder="Enter todo here..." onChange={(e) => onChange(e.target.value)} />
+            <input className="todo-input" value={newTask} placeholder="Enter todo here..." onChange={(e) => onChange(e.target.value)} />
             <button className="btn btn-primary" onClick={onSubmit}>
                 <AddIcon className="small-icon" /> Add
             </button>
@@ -12,4 +13,4 @@ const TodoNew = ({ onChange, onSubmit }) => {
     )
 }
 
-export default TodoNew
+export default memo(TodoNew)
