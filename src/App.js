@@ -4,15 +4,16 @@ import TodoNew from './components/TodoNew'
 import TodoTask from './components/TodoTask'
 import EditPopup from './components/EditPopup'
 import reducer, { initState } from "./store/reducer"
-import { setNewTask, addNewTask, deleteTask } from "./store/actions"
+import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask } from "./store/actions"
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initState)
   const [isShowPopup, setIsShowPopup] = useState(false)
-  const { newTask, tasks } = state;
+  const { newTask, tasks, editTask } = state;
 
   const todoInputRef = useRef()
 
+  // Event in TodoNew Component
   const handleChangeTask = useCallback((task) => {
     dispatch(setNewTask(task))
   }, [newTask])
@@ -23,25 +24,34 @@ function App() {
     todoInputRef.current.focus()
   }, [newTask])
 
+  // Event in TodoTask Component
   const handleDeleteTask = useCallback((index) => {
     dispatch(deleteTask(index))
-  }, [tasks.length])
+  }, [tasks])
 
-  const handleOpenPopup = (index) => {
-    console.log(index)
+  const handleOpenPopup = useCallback((index) => {
+    dispatch(setEditTask({ index: index, text: tasks[index] }))
     setIsShowPopup(true);
-  }
+  }, [tasks])
 
+  // Event in EditPopup Component
+  // In this component, don't need using useCallback and memo 
+  // because this only rerender when user click edit task 
+  // and in EditPopup Component only have 1 event to rerender
   const handleClosePopup = () => {
     setIsShowPopup(false);
   }
 
   const handleSave = () => {
-    console.log("save")
+    dispatch(updateTask({ index: editTask.index, text: editTask.text }))
     setIsShowPopup(false);
   }
 
-  console.log("re-render")
+  const handleChangeEditTask = (index, task) => {
+    dispatch(setEditTask({ index: index, text: task }))
+  }
+
+  console.log("re-render", editTask)
 
   return (
     <div className="container">
@@ -59,7 +69,12 @@ function App() {
             onEdit={handleOpenPopup} />
         </div>
       </div>
-      {isShowPopup && <EditPopup onClosePopup={handleClosePopup} onSave={handleSave} />}
+      {isShowPopup && 
+        <EditPopup 
+          editTask={editTask} 
+          onChangeEditTask={handleChangeEditTask}
+          onClosePopup={handleClosePopup} 
+          onSave={handleSave} />}
     </div>
   );
 }
