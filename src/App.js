@@ -4,12 +4,12 @@ import TodoNew from './components/TodoNew'
 import TodoTask from './components/TodoTask'
 import EditPopup from './components/EditPopup'
 import reducer, { initState } from "./store/reducer"
-import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask } from "./store/actions"
+import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask, addDoneTask } from "./store/actions"
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initState)
   const [isShowPopup, setIsShowPopup] = useState(false)
-  const { newTask, tasks, editTask } = state;
+  const { newTask, tasks, editTask, doneTasks } = state;
 
   const todoInputRef = useRef()
 
@@ -33,6 +33,11 @@ function App() {
     dispatch(setEditTask({ index: index, text: tasks[index] }))
     setIsShowPopup(true);
   }, [tasks])
+ 
+  const handleCheckDoneTask = useCallback((index) => {
+    dispatch(addDoneTask(tasks[index]))
+    dispatch(deleteTask(index))
+  }, [tasks])
 
   // Event in EditPopup Component
   // In this component, don't need using useCallback and memo 
@@ -51,7 +56,7 @@ function App() {
     dispatch(setEditTask({ index: index, text: task }))
   }
 
-  console.log("re-render", editTask)
+  console.log("re-render", doneTasks)
 
   return (
     <div className="container">
@@ -66,7 +71,19 @@ function App() {
           <TodoTask
             tasks={tasks}
             onDelete={handleDeleteTask}
-            onEdit={handleOpenPopup} />
+            onEdit={handleOpenPopup} 
+            onCheckDoneTask={handleCheckDoneTask} />
+        </div>
+      </div>
+      <div className="todo-box">
+        <h1 className="heading">Done<span> ({doneTasks.length || 0})</span></h1>
+        <div className="todo-body">
+          <TodoTask
+            tasks={doneTasks}
+            isTypeDone={true}
+            onDelete={handleDeleteTask}
+            onEdit={handleOpenPopup} 
+            onCheckDoneTask={handleCheckDoneTask} />
         </div>
       </div>
       {isShowPopup && 

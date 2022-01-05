@@ -16,6 +16,10 @@ body {
   border: 3px solid #e6e6e6;
 }
 
+.todo-box:not(:last-child){
+  margin-bottom: 5rem;
+}
+
 .heading {
   font-size: 2.8rem;
   padding: 1rem 2rem;
@@ -29,6 +33,7 @@ body {
 
 .todo-new {
   display: flex;
+  margin-bottom: 2rem;
 }
 
 .todo-input {
@@ -61,7 +66,6 @@ body {
 }
 
 .todo-tasks {
-  margin-top: 2rem;
   border: 2px solid #e6e6e6;
   border-radius: .5rem;
 }

@@ -1,4 +1,10 @@
-import { SET_NEW_TASK, ADD_NEW_TASK, DELETE_TASK, SET_EDIT_TASK, UPDATE_TASK } from "./constants"
+import { 
+    SET_NEW_TASK, 
+    ADD_NEW_TASK, 
+    DELETE_TASK, 
+    SET_EDIT_TASK, 
+    UPDATE_TASK, 
+    ADD_DONE_TASK } from "./constants"
 
 // Init state
 export const initState = {
@@ -7,11 +13,13 @@ export const initState = {
         index: 0,
         text: ""
     },
-    tasks: []
+    tasks: [], 
+    doneTasks: []
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
+        // Todo Task
         case SET_NEW_TASK: 
             return {
                 ...state,
@@ -36,6 +44,13 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 editTask: action.payload
+            }
+
+        // Done Task
+        case ADD_DONE_TASK: 
+            return {
+                ...state,
+                doneTasks: [...state.doneTasks, action.payload]
             }
         default:
             throw new Error("Invalid action")
