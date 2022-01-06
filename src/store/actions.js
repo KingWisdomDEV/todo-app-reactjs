@@ -4,7 +4,8 @@ import {
     DELETE_TASK, 
     SET_EDIT_TASK, 
     UPDATE_TASK,
-    ADD_DONE_TASK } from "./constants"
+    ADD_DONE_TASK,
+    DELETE_DONE_TASK } from "./constants"
 
 //
 // Todo Task
@@ -50,6 +51,13 @@ export const setEditTask = payload => {
 export const addDoneTask = payload => {
     return {
         type: ADD_DONE_TASK,
+        payload: payload
+    }
+}
+
+export const deleteDoneTask = payload => {
+    return {
+        type: DELETE_DONE_TASK,
         payload: payload
     }
 }

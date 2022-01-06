@@ -4,7 +4,7 @@ import TodoNew from './components/TodoNew'
 import TodoTask from './components/TodoTask'
 import EditPopup from './components/EditPopup'
 import reducer, { initState } from "./store/reducer"
-import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask, addDoneTask } from "./store/actions"
+import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask, addDoneTask, deleteDoneTask } from "./store/actions"
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initState)
@@ -33,7 +33,7 @@ function App() {
     dispatch(setEditTask({ index: index, text: tasks[index] }))
     setIsShowPopup(true);
   }, [tasks])
- 
+
   const handleCheckDoneTask = useCallback((index) => {
     dispatch(addDoneTask(tasks[index]))
     dispatch(deleteTask(index))
@@ -56,7 +56,19 @@ function App() {
     dispatch(setEditTask({ index: index, text: task }))
   }
 
-  console.log("re-render", doneTasks)
+  //
+  // Events in Done Task box
+  //
+  const handleDeleteDoneTask = useCallback((index) => {
+    dispatch(deleteDoneTask(index))
+  }, [doneTasks])
+
+  const handleUnCheckDoneTask = useCallback((index) => {
+    dispatch(addNewTask(doneTasks[index]))
+    dispatch(deleteDoneTask(index))
+  }, [doneTasks])
+
+  console.log("re-render App")
 
   return (
     <div className="container">
@@ -71,7 +83,7 @@ function App() {
           <TodoTask
             tasks={tasks}
             onDelete={handleDeleteTask}
-            onEdit={handleOpenPopup} 
+            onEdit={handleOpenPopup}
             onCheckDoneTask={handleCheckDoneTask} />
         </div>
       </div>
@@ -82,15 +94,17 @@ function App() {
             tasks={doneTasks}
             isTypeDone={true}
             onDelete={handleDeleteTask}
-            onEdit={handleOpenPopup} 
-            onCheckDoneTask={handleCheckDoneTask} />
+            onDeleteDoneTask={handleDeleteDoneTask}
+            onEdit={handleOpenPopup}
+            onCheckDoneTask={handleCheckDoneTask}
+            onUnCheckDoneTask={handleUnCheckDoneTask} />
         </div>
       </div>
-      {isShowPopup && 
-        <EditPopup 
-          editTask={editTask} 
+      {isShowPopup &&
+        <EditPopup
+          editTask={editTask}
           onChangeEditTask={handleChangeEditTask}
-          onClosePopup={handleClosePopup} 
+          onClosePopup={handleClosePopup}
           onSave={handleSave} />}
     </div>
   );

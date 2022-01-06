@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import TodoItem from './TodoItem'
 
-const TodoTask = ({ tasks = [], onDelete, onEdit, onCheckDoneTask, isTypeDone }) => {
+const TodoTask = ({ tasks = [], onDelete, onEdit, onCheckDoneTask, isTypeDone, onDeleteDoneTask, onUnCheckDoneTask }) => {
     console.log("render-TodoTask", isTypeDone)
     if (tasks.length <= 0) return null
 
@@ -9,13 +9,15 @@ const TodoTask = ({ tasks = [], onDelete, onEdit, onCheckDoneTask, isTypeDone })
         <div className="todo-tasks">
             {tasks.map((task, index) =>
                 <TodoItem
-                    key={index} 
+                    key={Math.floor(Math.random() * 100)} 
                     isTypeDone={isTypeDone}
                     task={task} 
                     index={index} 
                     onDelete={onDelete} 
+                    onDeleteDoneTask={onDeleteDoneTask}
                     onEdit={onEdit}
-                    onCheckDoneTask={onCheckDoneTask} />
+                    onCheckDoneTask={onCheckDoneTask}
+                    onUnCheckDoneTask={onUnCheckDoneTask} />
             )}
         </div>
     )

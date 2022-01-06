@@ -4,7 +4,8 @@ import {
     DELETE_TASK, 
     SET_EDIT_TASK, 
     UPDATE_TASK, 
-    ADD_DONE_TASK } from "./constants"
+    ADD_DONE_TASK,
+    DELETE_DONE_TASK } from "./constants"
 
 // Init state
 export const initState = {
@@ -51,6 +52,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 doneTasks: [...state.doneTasks, action.payload]
+            }
+        case DELETE_DONE_TASK: 
+            return {
+                ...state,
+                doneTasks: state.doneTasks.filter((task, index) => index !== action.payload)
             }
         default:
             throw new Error("Invalid action")

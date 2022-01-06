@@ -1,12 +1,12 @@
 import { DeleteIcon, EditIcon } from './Icons'
 
-const TodoItem = ({ task = "", isTypeDone, onDelete, onEdit, onCheckDoneTask, index }) => {
-    console.log("render-TodoItem")
+const TodoItem = ({ task = "", index, isTypeDone, onDelete, onEdit, onCheckDoneTask, onDeleteDoneTask, onUnCheckDoneTask }) => {
+    console.log("render-TodoItem with type", isTypeDone)
     return (
         <div className="todo-item">
             <input 
                 className="todo-checkbox" 
-                onChange={() => { onCheckDoneTask(index) }} 
+                onChange={() => { isTypeDone ? onUnCheckDoneTask(index) : onCheckDoneTask(index) }} 
                 type="checkbox"
                 checked={isTypeDone} 
                 />
@@ -15,7 +15,7 @@ const TodoItem = ({ task = "", isTypeDone, onDelete, onEdit, onCheckDoneTask, in
                 {!isTypeDone && <button className="btn btn-secondary mr-small" onClick={() => onEdit(index)}>
                     <EditIcon className="medium-icon" />
                 </button>}
-                <button className="btn btn-danger" onClick={() => onDelete(index)}>
+                <button className="btn btn-danger" onClick={() => isTypeDone ? onDeleteDoneTask(index) : onDelete(index)}>
                     <DeleteIcon className="medium-icon" />
                 </button>
             </div>
