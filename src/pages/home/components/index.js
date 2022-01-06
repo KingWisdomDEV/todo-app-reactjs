@@ -1,15 +1,14 @@
-import { useReducer, useCallback, useRef, useState } from "react"
+import { useReducer, useCallback, useRef } from "react"
 import TodoNew from '../../../components/TodoNew'
 import TodoTask from '../../../components/TodoTask'
 import EditPopup from '../../../components/EditPopup'
 import reducer, { initState } from "../../../store/reducer"
-import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask, addDoneTask, deleteDoneTask } from "../../../store/actions"
+import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask, addDoneTask, deleteDoneTask, setShowPopup } from "../../../store/actions"
 import logger from "../../../utils/logger"
 
 function HomePage() {
   const [state, dispatch] = useReducer(logger(reducer), initState)
-  const [isShowPopup, setIsShowPopup] = useState(false)
-  const { newTask, tasks, editTask, doneTasks } = state;
+  const { newTask, tasks, editTask, doneTasks, isShowPopup } = state;
 
   const todoInputRef = useRef()
 
@@ -31,7 +30,7 @@ function HomePage() {
 
   const handleOpenPopup = useCallback((index) => {
     dispatch(setEditTask({ index: index, text: tasks[index] }))
-    setIsShowPopup(true);
+    dispatch(setShowPopup(true))
   }, [tasks])
 
   const handleCheckDoneTask = useCallback((index) => {
@@ -44,12 +43,12 @@ function HomePage() {
   // because this only rerender when user click edit task 
   // and in EditPopup Component only have 1 event to rerender
   const handleClosePopup = () => {
-    setIsShowPopup(false);
+    dispatch(setShowPopup(false))
   }
 
   const handleSave = () => {
     dispatch(updateTask({ index: editTask.index, text: editTask.text }))
-    setIsShowPopup(false);
+    dispatch(setShowPopup(false))
   }
 
   const handleChangeEditTask = (index, task) => {

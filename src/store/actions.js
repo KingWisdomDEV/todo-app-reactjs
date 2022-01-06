@@ -5,7 +5,8 @@ import {
     SET_EDIT_TASK, 
     UPDATE_TASK,
     ADD_DONE_TASK,
-    DELETE_DONE_TASK } from "./constants"
+    DELETE_DONE_TASK,
+    SET_SHOW_POPUP } from "./constants"
 
 //
 // Todo Task
@@ -41,6 +42,16 @@ export const deleteTask = payload => {
 export const setEditTask = payload => {
     return {
         type: SET_EDIT_TASK,
+        payload: payload
+    }
+}
+
+//
+// Popup
+//
+export const setShowPopup = payload => {
+    return {
+        type: SET_SHOW_POPUP,
         payload: payload
     }
 }

@@ -5,7 +5,8 @@ import {
     SET_EDIT_TASK, 
     UPDATE_TASK, 
     ADD_DONE_TASK,
-    DELETE_DONE_TASK } from "./constants"
+    DELETE_DONE_TASK,
+    SET_SHOW_POPUP } from "./constants"
 
 // Init state
 export const initState = {
@@ -15,7 +16,8 @@ export const initState = {
         text: ""
     },
     tasks: [], 
-    doneTasks: []
+    doneTasks: [], 
+    isShowPopup: false
 }
 
 const reducer = (state, action) => {
@@ -45,6 +47,13 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 editTask: action.payload
+            }
+            
+        // Popup
+        case SET_SHOW_POPUP: 
+            return {
+                ...state,
+                isShowPopup: action.payload
             }
 
         // Done Task
