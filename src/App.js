@@ -5,9 +5,10 @@ import TodoTask from './components/TodoTask'
 import EditPopup from './components/EditPopup'
 import reducer, { initState } from "./store/reducer"
 import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask, addDoneTask, deleteDoneTask } from "./store/actions"
+import logger from "./utils/logger"
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initState)
+  const [state, dispatch] = useReducer(logger(reducer), initState)
   const [isShowPopup, setIsShowPopup] = useState(false)
   const { newTask, tasks, editTask, doneTasks } = state;
 
