@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/KingWisdomDEV/todo-app-reactjs/static/css/main.50d3d274.css",
+    "main.js": "/KingWisdomDEV/todo-app-reactjs/static/js/main.62a04505.js",
+    "static/js/787.9bbd3b2a.chunk.js": "/KingWisdomDEV/todo-app-reactjs/static/js/787.9bbd3b2a.chunk.js",
+    "static/media/background-desktop.jpg": "/KingWisdomDEV/todo-app-reactjs/static/media/background-desktop.8eb220d3aa72856555d2.jpg",
+    "index.html": "/KingWisdomDEV/todo-app-reactjs/index.html",
+    "main.50d3d274.css.map": "/KingWisdomDEV/todo-app-reactjs/static/css/main.50d3d274.css.map",
+    "main.62a04505.js.map": "/KingWisdomDEV/todo-app-reactjs/static/js/main.62a04505.js.map",
+    "787.9bbd3b2a.chunk.js.map": "/KingWisdomDEV/todo-app-reactjs/static/js/787.9bbd3b2a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.50d3d274.css",
+    "static/js/main.62a04505.js"
+  ]
+}
