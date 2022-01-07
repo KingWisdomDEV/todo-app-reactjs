@@ -18,7 +18,8 @@ const TodoNew = ({ newTask, onChange, onSubmit }, ref) => {
                 className="todo-input"
                 value={newTask}
                 placeholder="Enter todo here..."
-                onChange={(e) => onChange(e.target.value)} />
+                onChange={(e) => onChange(e.target.value)}
+                onKeyPress={e => { e.key === "Enter" && onSubmit() }} />
             <button className="btn btn-primary" onClick={onSubmit}>
                 <AddIcon className="small-icon" /> Add
             </button>
