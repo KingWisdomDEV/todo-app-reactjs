@@ -9,7 +9,7 @@ const TodoTask = ({ tasks = [], onDelete, onEdit, onCheckDoneTask, isTypeDone, o
         <div className="todo-tasks">
             {tasks.map((task, index) =>
                 <TodoItem
-                    key={Math.floor(Math.random() * 100)} 
+                    key={Math.floor(Math.random() * 10000)} 
                     isTypeDone={isTypeDone}
                     task={task} 
                     index={index} 

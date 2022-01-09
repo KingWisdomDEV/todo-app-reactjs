@@ -6,7 +6,8 @@ import {
     UPDATE_TASK,
     ADD_DONE_TASK,
     DELETE_DONE_TASK,
-    SET_SHOW_POPUP } from "./constants"
+    SET_SHOW_POPUP,
+    SET_USER_TASKS } from "./constants"
 
 //
 // Todo Task
@@ -69,6 +70,16 @@ export const addDoneTask = payload => {
 export const deleteDoneTask = payload => {
     return {
         type: DELETE_DONE_TASK,
+        payload: payload
+    }
+}
+
+//
+// User Tasks with cookies
+//
+export const setUserTasks = payload => {
+    return {
+        type: SET_USER_TASKS,
         payload: payload
     }
 }

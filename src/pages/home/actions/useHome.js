@@ -1,8 +1,39 @@
-import { useCallback } from "react"
-import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask, addDoneTask, deleteDoneTask, setShowPopup } from "../../../store/actions"
+import { useCallback, useEffect } from "react"
+import { setNewTask, addNewTask, deleteTask, setEditTask, updateTask, addDoneTask, deleteDoneTask, setShowPopup, setUserTasks } from "../../../store/actions"
+import { useCookies } from 'react-cookie';
 
 export const useHome = ({ state, dispatch, todoInputRef }) => {
   const { newTask, tasks, editTask, doneTasks } = state;
+
+  const [cookies, setCookie] = useCookies(['userTasks']);
+  const { userTasks } = cookies
+
+  // check cookies and set values for user tasks in first access
+  useEffect(() => {
+    if (!userTasks) {
+      const userTasks = {
+        tasks: [],
+        doneTasks: []
+      }
+      setUserTasksCookies(userTasks)
+    } else {
+      dispatch(setUserTasks({ ...userTasks }))
+    }
+  }, []);
+
+  // Update cookies when state tasks changed
+  useEffect(() => {
+    setUserTasksCookies({ tasks: tasks, doneTasks: doneTasks })
+  }, [tasks]);
+
+  // Update cookies when state doneTasks changed
+  useEffect(() => {
+    setUserTasksCookies({ tasks: tasks, doneTasks: doneTasks })
+  }, [doneTasks]);
+
+  const setUserTasksCookies = (userTasks) => {
+    setCookie('userTasks', JSON.stringify(userTasks), { path: '/' })
+  }
 
   // Event in TodoNew Component
   const handleChangeTask = useCallback((task) => {

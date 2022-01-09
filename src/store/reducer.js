@@ -6,7 +6,8 @@ import {
     UPDATE_TASK, 
     ADD_DONE_TASK,
     DELETE_DONE_TASK,
-    SET_SHOW_POPUP } from "./constants"
+    SET_SHOW_POPUP,
+    SET_USER_TASKS } from "./constants"
 
 // Init state
 export const initState = {
@@ -66,6 +67,14 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 doneTasks: state.doneTasks.filter((task, index) => index !== action.payload)
+            }
+        
+        // Init tasks and doneTasks with cookies value    
+        case SET_USER_TASKS: 
+            return {
+                ...state,
+                tasks: action.payload.tasks,
+                doneTasks: action.payload.doneTasks
             }
         default:
             throw new Error("Invalid action")
